@@ -184,36 +184,17 @@ def main():
     filename = sys.argv[1]
     
     try:
-        # Read graph from file
+        # read graph from file
         graph, start_city, goal_city = read_graph_from_file(filename)
-        
-        print(f"Graph loaded from {filename}")
-        print(f"Start city: {start_city}")
-        print(f"Goal city: {goal_city}")
-        print(f"Number of cities: {len(graph.cities)}")
-        print()
         
         # Run A* search
         shortest_path, exploration_order = astar_search(graph, start_city, goal_city)
         
         # Print results
         if shortest_path:
-            print("Shortest path found:")
+            print(f"Shortest path found between {start_city} and {goal_city}:")
             print(" -> ".join(shortest_path))
             
-            # Calculate total distance
-            total_distance = 0
-            for i in range(len(shortest_path) - 1):
-                city1 = graph.cities[shortest_path[i]]
-                city2 = graph.cities[shortest_path[i + 1]]
-                total_distance += city1.distance_to(city2)
-            print(f"Total distance: {total_distance:.2f}")
-        else:
-            print("No path found from start to goal!")
-        
-        print()
-        print("Exploration order:")
-        print(" -> ".join(exploration_order))
         
     except FileNotFoundError:
         print(f"Error: File '{filename}' not found.")
