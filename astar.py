@@ -184,17 +184,22 @@ def main():
     filename = sys.argv[1]
     
     try:
-        # read graph from file
+        # Read graph from file
         graph, start_city, goal_city = read_graph_from_file(filename)
-        
+
         # Run A* search
         shortest_path, exploration_order = astar_search(graph, start_city, goal_city)
         
         # Print results
         if shortest_path:
-            print(f"Shortest path found between {start_city} and {goal_city}:")
+            print("Shortest path found:")
             print(" -> ".join(shortest_path))
             
+
+        
+        print()
+        print("Exploration order:")
+        print(" -> ".join(exploration_order))
         
     except FileNotFoundError:
         print(f"Error: File '{filename}' not found.")
