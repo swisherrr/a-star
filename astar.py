@@ -174,39 +174,36 @@ def astar_search(graph: Graph, start: str, goal: str) -> Tuple[List[str], List[s
 
 
 def main():
-    """Main function to run the A* algorithm."""
-    import sys
+    """Main function to run the A* algorithm on hardcoded examples."""
+    examples = ["example-1.data", "example2-1.data"]
     
-    if len(sys.argv) != 2:
-        print("Usage: python astar.py <data_file>")
-        sys.exit(1)
-    
-    filename = sys.argv[1]
-    
-    try:
-        # Read graph from file
-        graph, start_city, goal_city = read_graph_from_file(filename)
-
-        # Run A* search
-        shortest_path, exploration_order = astar_search(graph, start_city, goal_city)
+    for filename in examples:
+        print(f"\n{'='*50}")
+        print(f"Running A* on {filename}")
+        print(f"{'='*50}")
         
-        # Print results
-        if shortest_path:
-            print("Shortest path found:")
-            print(" -> ".join(shortest_path))
+        try:
+            # Read graph from file
+            graph, start_city, goal_city = read_graph_from_file(filename)
+
+            # Run A* search
+            shortest_path, exploration_order = astar_search(graph, start_city, goal_city)
             
-
-        
-        print()
-        print("Exploration order:")
-        print(" -> ".join(exploration_order))
-        
-    except FileNotFoundError:
-        print(f"Error: File '{filename}' not found.")
-        sys.exit(1)
-    except Exception as e:
-        print(f"Error: {e}")
-        sys.exit(1)
+            # Print results
+            if shortest_path:
+                print("Shortest path found:")
+                print(" -> ".join(shortest_path))
+            else:
+                print("No path found!")
+            
+            print()
+            print("Exploration order:")
+            print(" -> ".join(exploration_order))
+            
+        except FileNotFoundError:
+            print(f"Error: File '{filename}' not found.")
+        except Exception as e:
+            print(f"Error: {e}")
 
 
 if __name__ == "__main__":
